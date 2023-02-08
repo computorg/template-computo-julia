@@ -35,8 +35,9 @@ jobs:
       
       ## Add needed packages by hand
       - name: Install Julia Dependencies
-        run: julia --project=.
-      
+        uses: julia-actions/julia-buildpkg@v1
+        uses: julia-actions/julia-runtest@v1      
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
