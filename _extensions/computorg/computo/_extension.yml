@@ -1,0 +1,76 @@
+title: Computo Format Template
+author: Computorg Team
+version: 0.2.1
+contributes:
+  formats:
+    common:
+      # define below YAML configuration common to all formats
+      filters:
+        # You can include here Lua filters from your extension format
+        - color-text.lua
+        - list-table.lua
+        - pseudocode.lua
+        - not-in-format.lua
+        - code-block-all.lua
+      shortcodes:
+        # You can include here Lua filters defining shortcodes from your extension
+        - shortcodes.lua
+      knitr:
+        opts_chunk:
+          echo: true
+          screenshot.opts:
+            cliprect: viewport
+            vwidth: 640
+            vheight: 400
+      number-sections: true
+      toc: true
+      toc-title: Contents
+      code-copy: true
+      code-block-background: true
+    html:
+      theme: [code-block-all.scss, custom.scss]
+      title-block-banner: "#034E79"
+      title-block-banner-color: "#FFFFFF"
+      license: "CC BY"
+      reference-section-title: Bibliography
+      date-format: long
+      hover-citations: true
+      hover-footnotes: true
+      fig-format: png
+      highlight-style: github
+      code-block-background: true
+      code-tools:
+        source: true
+        toggle: false
+        caption: "source"
+      code-copy: true
+      code-summary: "Hide/Show the code"
+      code-fold: show
+      anchor-sections: true
+      link-external-icon: false
+      link-external-newwindow: true
+      crossref:
+      sec-prefix: Section
+      eq-prefix: Equation
+      fig-prefix: Figure
+      tbl-prefix: Table
+      html-math-method: katex
+      template-partials:
+        - "partials/html/title-block.html"
+        - "partials/html/title-metadata.html"
+    pdf:
+      pdf-engine: lualatex
+      papersize: a4
+      geometry: a4paper
+      fontfamily: libertinus
+      fontsize: 11pt
+      highlight-style: github
+      monofont: Latin Modern Mono
+      monofontoptions:
+        - Scale=0.92
+      include-in-header:
+        - "partials/pdf/include-in-header.tex"
+      template-partials:
+        - "partials/pdf/before-body.tex"
+      format-resources:
+        - logo_text_white.pdf
