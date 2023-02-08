@@ -36,6 +36,9 @@ jobs:
       ## Add needed packages by hand
       - name: Install Julia Dependencies
         uses: julia-actions/julia-buildpkg@v1
+      
+      - name: Registering Julia 1.8
+        run: julia --project -e 'using Pkg ; Pkg.build("IJulia")'
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
