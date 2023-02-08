@@ -22,7 +22,7 @@ author:
 date: last-modified
 date-modified: last-modified
 description: |
-  This document provides a template based on the [`quarto`](https://quarto.org/) system for contributions to Computo, using the [`quarto journal extension`](https://github.com/computorg/computo-quarto-extension), the Jupyter kernel (Julia user) and the Julia `Pkg` manager to set-up the dependencies.
+  This document provides a template based on the [`quarto`](https://quarto.org/) system for contributions to Computo, using the [`quarto journal extension`](https://github.com/computorg/computo-quarto-extension), the Julia 1-8 Jupyter and the Julia `Pkg` manager to set-up the dependencies.
 abstract: >+
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere vestibulum facilisis. Aenean pretium orci augue, quis lobortis libero accumsan eu. Nam mollis lorem sit amet pellentesque ullamcorper. Curabitur lobortis libero eget malesuada vestibulum. Nam nec nibh massa. Pellentesque porttitor cursus tellus. Mauris urna erat, rhoncus sed faucibus sit amet, venenatis eu ipsum.
 keywords: [key1, key2, key3]
@@ -232,17 +232,11 @@ Advanced formatting features are possible and documented (including interactive 
 
 ## Handle `Julia` dependencies with `Pkg`
 
-To make your work reproducible, you need to fix the packages and environment used to run your analysis. In `Julia`, the built-in `Pkg` package manager is a method of choice.
+To make your work reproducible, you need to fix the packages and environment used to run your analysis. In `Julia`, the built-in `Pkg` package manager is a method of choice. [https://towardsdatascience.com/how-to-setup-project-environments-in-julia-ec8ae73afe9c](This simple tutorial shows how to set up a project). 
 
-[https://towardsdatascience.com/how-to-setup-project-environments-in-julia-ec8ae73afe9c](This simple tutorial shows how to set up your project). 
+In this tutorial, we simply need to add the `Plots` library and its dependencies. It is important that you also add `IJulia` to your project, since it is a required dependency for quarto to correclty render your document via Jupyter.
 
-In this tutorial, we simply need to add the `Plots` library and its dependencies. Once added via the `Pkg` manager of Julia, the files `Project.toml` and `Manifest.toml` in the `julia_env` directory contains in information required. We then use the command
-
-``` .bash
-julia --project=.
-```
-
-In the CI  to set up the environment ready for reproductibility.
+Once added via the `Pkg` manager of Julia (`add Plots; add IJulia`), the files `Project.toml` and `Manifest.toml` in the current project directory contains all the information required.
 
 ## Continuous integration
 
@@ -250,7 +244,7 @@ The repository associated with this template is pre-configure to trigger an acti
 
 1. Check out repository on the `ubuntu-latest` machine
 2. Install quarto and dependencies, including the Computo extension
-3. Install Julia (1.8.1) and dependencies based on the files `Project.toml` and `Manifest.toml` in `julia_env`
+3. Install Julia (1.8.1) and dependencies based on the files `Project.toml` and `Manifest.toml`
 4. Render your .qmd file and Publish the results on a gh-page (both HTML and PDF)
 
 The file [.github/workflows/build_n_publish.yml](https://github.com/computorg/template-computo-python/blob/main/.github/workflows/build_n_publish.yml) is largely inspired from [this file](https://quarto.org/docs/publishing/github-pages.html#example-jupyter-with-venv).
