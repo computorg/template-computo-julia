@@ -22,7 +22,7 @@ author:
 date: last-modified
 date-modified: last-modified
 description: |
-  This document provides a template based on the [`quarto`](https://quarto.org/) system for contributions to Computo, using the [`quarto journal extension`](https://github.com/computorg/computo-quarto-extension), the Jupyter kernel (Julia user) and `some_julia_thing` to set-up the dependencies.
+  This document provides a template based on the [`quarto`](https://quarto.org/) system for contributions to Computo, using the [`quarto journal extension`](https://github.com/computorg/computo-quarto-extension), the Jupyter kernel (Julia user) and the Julia `Pkg` manager to set-up the dependencies.
 abstract: >+
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere vestibulum facilisis. Aenean pretium orci augue, quis lobortis libero accumsan eu. Nam mollis lorem sit amet pellentesque ullamcorper. Curabitur lobortis libero eget malesuada vestibulum. Nam nec nibh massa. Pellentesque porttitor cursus tellus. Mauris urna erat, rhoncus sed faucibus sit amet, venenatis eu ipsum.
 keywords: [key1, key2, key3]
@@ -48,7 +48,7 @@ jupyter: julia-1.8
 
 ## About this document
 
-This document, accompanied with the [hopefully finely tuned git repos](https://github.com/computorg/template-computo-python/), provides a template for writing contributions to **Computo** [@computo]. We show how `Julia` code can be included and how the repository can be set up for triggering github actions for rendering the document, with dependencies handled by `some_julia_thing`.
+This document, accompanied with the [hopefully finely tuned git repos](https://github.com/computorg/template-computo-python/), provides a template for writing contributions to **Computo** [@computo]. We show how `Julia` code can be included and how the repository can be set up for triggering github actions for rendering the document, with dependencies handled by the built-in `Pkg` manager.
 
 ## Setup a github repository for preparing your submission
 
@@ -230,49 +230,19 @@ Advanced formatting features are possible and documented (including interactive 
 
 # Finalize your submission
 
-## Handle `Python` dependencies with `venv`
+## Handle `Julia` dependencies with `Pkg`
 
-To make your work reproducible, you need to fix the packages and environment used to run your analysis. For the `R` system, the `renv` package is one of the possible reliable method, supported by the community. You basically need a couple of commands to setup your environment on your local machine. First, to create a new virtual environment in the directory `my_env`
+To make your work reproducible, you need to fix the packages and environment used to run your analysis. In `Julia`, the built-in `Pkg` package manager is a method of choice.
 
-``` .bash
-python3 -m venv my_env
-```
+[https://towardsdatascience.com/how-to-setup-project-environments-in-julia-ec8ae73afe9c](This simple tutorial shows how to set up your project). 
 
-and activate it 
+In this tutorial, we simply need to add the `Plots` library and its dependencies. Once added via the `Pkg` manager of Julia, the files `Project.toml` and `Manifest.toml` in the `julia_env` directory contains in information required. We then use the command
 
 ``` .bash
-source my_env/bin/activate
+julia --project=.
 ```
 
-Then installed the packages required to perform your analysis. Here,
-
-``` .bash
-python3 -m pip install jupyter matplotlib numpy
-```
-
-Once you are all set up, you need to save your working environment into a file so that anyone can reproduce your analysis on his/her side:
-
-``` .bash
-python3 -m pip freeze > requirements.txt
-```
-
-The corresponding `requirements.txt` file [found in this repository](https://github.com/computorg/template-computo-python/blob/main/requirements.txt) is then
-
-```{.bash filename="requirements.txt"}
-jupyter
-matplotlib
-numpy
-```
-
-::: {.callout-important}
-`requirements.txt` is the only file that needs to be versioned by git.
-::: 
-
-More details for using `venv` and `pip` can be found on the [quarto page dedicated to environments](https://quarto.org/docs/projects/virtual-environments.html#using-venv).
-
-### What about `conda`?
-
-For `conda` user, it is also possible to follow the same path with your favorite version of `conda`. There is a [quarto page dedicated to the conda environments](https://quarto.org/docs/projects/virtual-environments.html#using-conda).
+In the CI  to set up the environment ready for reproductibility.
 
 ## Continuous integration
 
@@ -280,7 +250,7 @@ The repository associated with this template is pre-configure to trigger an acti
 
 1. Check out repository on the `ubuntu-latest` machine
 2. Install quarto and dependencies, including the Computo extension
-3. Install Python (3.10) and dependencies with `venv`, using your `requirements.txt` file
+3. Install Julia (1.8.1) and dependencies based on the files `Project.toml` and `Manifest.toml` in `julia_env`
 4. Render your .qmd file and Publish the results on a gh-page (both HTML and PDF)
 
 The file [.github/workflows/build_n_publish.yml](https://github.com/computorg/template-computo-python/blob/main/.github/workflows/build_n_publish.yml) is largely inspired from [this file](https://quarto.org/docs/publishing/github-pages.html#example-jupyter-with-venv).
@@ -296,10 +266,6 @@ quarto publish gh-pages
 
 Then, set the branch `gh-page` as the source of your github page, and trigger the action to check that everything works fine.
 ::: 
-
-### What about CI and `conda`?
-
-[The build and deploy process of our Computo quarto extension](https://github.com/computorg/computo-quarto-extension/blob/main/.github/workflows/build.yml) shows how `miniconda` can be set used in place of `venv`. The main striking difference is the use of a `environment.yml` file in place of `requirements.txt`.
 
 # References {.unnumbered}
 
