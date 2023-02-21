@@ -5,17 +5,19 @@
 
 Documentation and sample of a simple `Julia`-based submission for the [Computo journal](https://computorg.github.io), using our Quarto-based template and Julia github-action for handling dependencies.
 
-Shows how to automatically setup and build the HTML and PDF outputs, ready to submit to our peer-review platform.
+It shows how to automatically setup and build the HTML and PDF outputs, ready to submit to our peer-review platform.
 
-Additional details can be found [in the template manuscript](https://computo.sfds.asso.fr/template-computo-python). 
+:warning: **All important information about writing and preparing an article to be submitted to Computo, and related technicalities** are detailed [in the template manuscript](https://computo.sfds.asso.fr/template-computo-julia). :warning:
 
-  ## Process overview
+More information about submission and **guidelines for authors** can be found on the [dedicated page](https://computo.sfds.asso.fr/submit/).
+
+## Process overview
 
 Submissions to [Computo](https://computorg.github.io) require both scientific content (typically equations, codes and figures, data) and a proof that this content is reproducible. This is achieved by means of i) a notebook system, ii) a virtual environment fixing the dependencies and iii) continuous integration (plus, if needed, an external website to store large data files such a [Zenodo](https://zenodo.org/) or [OSF](https://osf.io/) ). 
 
 A Computo submission is thus a git(hub) repository like this one containing 
 
-- the source files of the notebook (a quarto .qmd file + a BibTeX .bib file + some statics files, _e.g._ figures or small .csv data tables)
+- the source files of the notebook (a quarto `.qmd` file + a BibTeX `.bib` file + some statics files, _e.g._ figures or small `.csv` data tables)
 - configuration files to set up the dependencies in a virtual environment
 - configuration files to set up the continuous integration rendering the final documents
 
@@ -29,7 +31,7 @@ In this template, we focus on `Julia` users and detail a solution based on
 
 ### Step 0: setup a git repository
 
-Use this repository as a template via the "use this template" button on the top of this page.
+Use this repository as a template via the **"use this template"** button on the top of this page.
 
 **Note**: _You can use Gitlab for submitting for Computo. We hope giving more support in the future._
 
@@ -44,13 +46,21 @@ quarto add computorg/computo-quarto-extension
 
 ### Step 2. write your contribution 
 
-Write your notebook as usual, [as demonstrated in the `template-computo-python.qmd` sample](https://computorg.github.io/template-computo-python/).
+Write your notebook as usual, [as demonstrated in the `template-computo-julia.qmd` sample](https://computorg.github.io/template-computo-julia/).
 
 **Note**: _Make sure that you are able to build your manuscript as a standard notebook on your system before proceeding to the next step._
+
+To build your document (both in PDF and HTML by default), you can run the command `quarto render`, e.g. for the template:
+
+```.bash
+quarto render template-computo-julia.qmd # will render both to html and PDF
+```
 
 ### Step 3: setup dependencies with `Pkg`, Julia's built-in package manager
 
 Use the [`Pkg` package manager](https://docs.julialang.org/en/v1/stdlib/Pkg/) to setup a reproducible environment handling your `Julia` dependencies.
+
+See [this page](https://computo.sfds.asso.fr/template-computo-julia/#handle-julia-dependencies-with-pkg) for more details about `julia` dependency setup.
 
 ### Step 4: proof reproducibility
 
