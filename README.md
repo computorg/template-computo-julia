@@ -23,7 +23,7 @@ A Computo submission is thus a git(hub) repository like this one containing
 
 In this template, we focus on `Julia` users and detail a solution based on
 
-- The `julia-1.8` `Jupyter` kernel of Quarto for rendering the document,
+- The `julia-1.10` `Jupyter` kernel of Quarto for rendering the document,
 - The Julia built-in `Pkg` for setting the environment,
 - Github actions for handling the continuous integration.
 
