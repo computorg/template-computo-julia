@@ -23,7 +23,7 @@ A Computo submission is thus a git(hub) repository like this one containing
 
 In this template, we focus on `Julia` users and detail a solution based on
 
-- The `julia-1.8` `Jupyter` kernel of Quarto for rendering the document,
+- The `julia-1.10` `Jupyter` kernel of Quarto for rendering the document,
 - The Julia built-in `Pkg` for setting the environment,
 - Github actions for handling the continuous integration.
 
@@ -78,4 +78,5 @@ This action will
 ### Step 5. submit
 
 Once step 4 is successful, you should end up with an HTML version published as a gh-page, as well as a PDF version (see "Other format" at the end of the table of content of the rendered HTML). This PDF version can be submitted to the [OpenReview platform](https://openreview.net/group?id=Computo).
+
 

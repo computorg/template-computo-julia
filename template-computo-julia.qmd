@@ -22,7 +22,7 @@ author:
 date: last-modified
 date-modified: last-modified
 description: |
-  This document provides a template based on the [`quarto`](https://quarto.org/) system for contributions to Computo, using the [`quarto journal extension`](https://github.com/computorg/computo-quarto-extension), the Julia 1-8 Jupyter and the Julia `Pkg` manager to set-up the dependencies.
+  This document provides a template based on the [`quarto`](https://quarto.org/) system for contributions to Computo, using the [`quarto journal extension`](https://github.com/computorg/computo-quarto-extension), the Julia 1-10 Jupyter and the Julia `Pkg` manager to set-up the dependencies.
 abstract: >+
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere vestibulum facilisis. Aenean pretium orci augue, quis lobortis libero accumsan eu. Nam mollis lorem sit amet pellentesque ullamcorper. Curabitur lobortis libero eget malesuada vestibulum. Nam nec nibh massa. Pellentesque porttitor cursus tellus. Mauris urna erat, rhoncus sed faucibus sit amet, venenatis eu ipsum.
 keywords: [key1, key2, key3]
@@ -41,7 +41,7 @@ published: false # will be set to true once accepted
 format:
   computo-html: default
   computo-pdf: default
-jupyter: julia-1.8
+jupyter: julia-1.10
 ---
 
 # Introduction
@@ -153,7 +153,7 @@ Quarto uses either Jupyter or knitr to render code chunks. This can be triggered
 ---
 title: "My Document"
 author "Jane Doe"
-jupyter: julia-1.8
+jupyter: julia-1.10
 ---
 ```
 
@@ -260,7 +260,7 @@ The repository associated with this template is pre-configure to trigger an acti
 
 1. Check out repository on the `ubuntu-latest` machine
 2. Install quarto and dependencies, including the Computo extension
-3. Install Julia (1.8.1) and dependencies based on the files `Project.toml` and `Manifest.toml`
+3. Install Julia (1.10) and dependencies based on the files `Project.toml` and `Manifest.toml`
 4. Render your .qmd file and Publish the results on a gh-page (both HTML and PDF)
 
 The file [.github/workflows/build_n_publish.yml](https://github.com/computorg/template-computo-python/blob/main/.github/workflows/build_n_publish.yml) is largely inspired from [this file](https://quarto.org/docs/publishing/github-pages.html#example-jupyter-with-venv).
