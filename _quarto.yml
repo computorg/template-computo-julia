@@ -38,6 +38,7 @@ github-user: computorg
 repo: "template-computo-julia"
 draft: true # set to false once the build is running
 published: false # will be set to true once accepted
+license: CC-BY-4.0
 format:
   computo-html: default
   computo-pdf: default
