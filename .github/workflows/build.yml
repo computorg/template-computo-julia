@@ -52,7 +52,7 @@ jobs:
         uses: julia-actions/julia-buildpkg@v1
 
       - name: Render
-          run: |
+        run: |
             quarto render --output-dir=public
             if [[ ! -f ./public/index.html ]]; then
               echo "No index.html found in public directory. copying the first HTML file."
