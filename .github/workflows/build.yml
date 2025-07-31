@@ -37,13 +37,13 @@ jobs:
         run: |
             quarto add --no-prompt computorg/computo-quarto-extension
 
-      - name: Install Jupyter
-        run: sudo apt-get install -y jupyter librsvg2-bin
+      - name: Install System dependencies
+        run: sudo apt-get install -y librsvg2-bin
 
       - name: Install Julia
         uses: julia-actions/setup-julia@v2
         with:
-          version: '1.10'
+          version: '1.11'
       - uses: julia-actions/cache@v1
         with:
           cache-registries: "true"
