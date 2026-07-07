@@ -120,7 +120,7 @@ x
 
 Plots can be generated as follows:
 
-```{julia stem-plot}
+```{julia}
 #| label: fig-parametric
 #| fig-cap: "Parametric Plots"
 
