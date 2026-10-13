@@ -12,7 +12,7 @@ This document provides only the key formatting principles. For a detailed, step-
 
 ## Quarto
 
-[Quarto](https://quarto.org/) is a versatile formatting system for authoring documents integrating markdown, LaTeX and code blocks interpreted either via Jupyter or Knitr (thus supporting Python, R and Julia). It relies on the [Pandoc](https://pandoc.org/MANUAL.html) document converter.
+[Quarto](https://quarto.org/) is a versatile formatting system for authoring documents integrating markdown, LaTeX and code blocks. The code is executed by an engine: Jupyter, Knitr or, as in this template, Quarto's own `julia` engine. Quarto relies on the [Pandoc](https://pandoc.org/MANUAL.html) document converter.
 
 ## Requirements
 
@@ -22,7 +22,7 @@ You need [quarto](https://quarto.org/) installed on your system and the [Computo
 quarto add computorg/computo-quarto-extension
 ```
 
-[`Julia`](https://julialang.org/) and [`Jupyter`](https://jupyter.org/install) must be installed on your computer.
+[`Julia`](https://julialang.org/) must be installed on your computer. We recommend installing it with [`juliaup`](https://github.com/JuliaLang/juliaup), which lets you switch to the exact version an article was written with. Neither Jupyter nor Python is needed.
 
 # Formatting
 
@@ -97,23 +97,37 @@ See @thm-slln.
 
 ## Julia Code
 
-Quarto uses either Jupyter or knitr to render code chunks. This can be triggered in the yaml header. In this tutorial, we use `Jupyter`, (`Julia` and `Jupyter` must be installed on your computer)
+The code chunks of this document are run by Quarto's [`julia` engine](https://quarto.org/docs/computations/julia.html), which starts Julia directly. The engine is selected for the whole project in `_quarto.yml`:
 
 ``` yaml
----
-title: "My Document"
-author "Jane Doe"
-jupyter: julia-1.10
----
+engines: ['julia']
 ```
 
 `julia` code chunks may be embedded as follows:
 
-```{julia julia-code}
+```{julia}
+#| label: julia-code
+
 using Random
 rng = MersenneTwister(1234)
 x = randn(rng, ComplexF32, (10,1))
 x
+```
+
+## Julia environment {#sec-environment}
+
+The packages used by your article are declared in `Project.toml`. Their exact versions, together with the version of Julia itself, are recorded in `Manifest.toml`. Both files belong to your submission: they are what makes your article reproducible.
+
+To add a package, run Julia's package manager in the directory of your article:
+
+```.bash
+julia --project=. -e 'using Pkg; Pkg.add("Plots")'
+```
+
+The engine runs your article in the environment found in its directory, and requires the Julia version recorded in `Manifest.toml`. Computo's continuous integration reads that version and installs it. If you move to another version of Julia, resolve the manifest again with it:
+
+```.bash
+julia --project=. -e 'using Pkg; Pkg.resolve()'
 ```
 
 ## Figures
@@ -186,11 +200,11 @@ Advanced formatting features are possible and documented (including interactive 
   + [User guide](https://quarto.org/docs/guide/)
   + [Options reference](https://quarto.org/docs/reference/)
 
-- [The template distributed with the Computo Quarto extension](https://computo.sfds.asso.fr/computo-quarto-extension/), which uses such advanced features.
+- [The template distributed with the Computo Quarto extension](https://computo-journal.org/computo-quarto-extension/), which uses such advanced features.
 
-- [Our mock version of the t-SNE paper](https://computo.sfds.asso.fr/published-paper-tsne/), a full and advanced example using Python and the Jupyter kernel.
+- [Our mock version of the t-SNE paper](https://computo-journal.org/published-paper-tsne/), a full and advanced example using Python and the Jupyter kernel.
 
-- [The previously published papers in Computo](https://computo.sfds.asso.fr/publications/) can be used as references.
+- [The previously published papers in Computo](https://computo-journal.org/site/publications.html) can be used as references.
 
 :::
 
